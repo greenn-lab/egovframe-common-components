@@ -51,12 +51,12 @@ function fn_egov_init(){
 function fn_modal_setting(){
 	//버튼에 모달 연결
 	$("#btnMbrId").egovModal( "egovModal" );
-	
+
 	//타이틀 설졍
 	$("#egovModal").setEgovModalTitle("<spring:message code="comUssUmt.userManageRegistModal.title" />"); //아이디 중복 확인
 	var content = "";
 	content = content + "<div class='modal-alignL' style='margin:5px 0 0 0'>"+"<spring:message code="comUssUmt.userManageRegistModal.userIsId" /> :"+"</div>"; //사용할아이디
-	content = content + "<div class='modal-alignL'>"+"<input type='text' id='checkIdModal' name='checkIdModal' value='' size='20' maxlength='20' />"+"</div>";	
+	content = content + "<div class='modal-alignL'>"+"<input type='text' id='checkIdModal' name='checkIdModal' value='' size='20' maxlength='20' />"+"</div>";
 	content += "<div style='clear:both;'></div>";
 	content += "<div id='divModalResult' style='margin:10px 0 0 0'><spring:message code="comUssUmt.userManageRegistModal.initStatus" /></div>"; //결과 : 중복확인을 실행하십시오.
 	//모달 body 설정
@@ -69,11 +69,11 @@ function fn_modal_setting(){
 	footer += "<span class='btn_style1 blue' id='btnModalSelect' onclick='fn_id_check()'><a href='#'>조회</a></span>&nbsp;";
 	//모달 footer 설정
 	$("#egovModal").setEgovModalfooter(footer);
-	
+
 	//엔터이벤트처리
 	$("input[name=checkIdModal]").keydown(function (key) {
 		if(key.keyCode == 13){
-			fn_id_check();	
+			fn_id_check();
 		}
 	});
 	footer = null;
@@ -82,18 +82,18 @@ function fn_modal_setting(){
 /*********************************************************
  * 아이디 체크 AJAX
  ******************************************************** */
-function fn_id_check(){	
+function fn_id_check(){
 	$.ajax({
 		type:"POST",
 		url:"<c:url value='/uss/umt/EgovIdDplctCnfirmAjax.do' />",
 		data:{
-			"checkId": $("#checkIdModal").val()			
+			"checkId": $("#checkIdModal").val()
 		},
 		dataType:'json',
 		timeout:(1000*30),
 		success:function(returnData, status){
 			if(status == "success") {
-				
+
 				if(returnData.usedCnt > 0 ){
 					//사용할수 없는 아이디입니다.
 					$("#divModalResult").html("<font color='red'><spring:message code="comUssUmt.userManageRegistModal.result" /> : ["+returnData.checkId+"]<spring:message code="comUssUmt.userManageRegistModal.useMsg" /></font>");
@@ -101,7 +101,7 @@ function fn_id_check(){
 					//사용가능한 아이디입니다.
 					$("#divModalResult").html("<font color='blue'><spring:message code="comUssUmt.userManageRegistModal.result" /> : ["+returnData.checkId+"]<spring:message code="comUssUmt.userManageRegistModal.notUseMsg" /></font>");
 				}
-			}else{ alert("ERROR!");return;} 
+			}else{ alert("ERROR!");return;}
 		}
 		});
 }
@@ -114,7 +114,7 @@ function fn_id_checkOk(){
 		type:"POST",
 		url:"<c:url value='/uss/umt/EgovIdDplctCnfirmAjax.do' />",
 		data:{
-			"checkId": $("#checkIdModal").val()			
+			"checkId": $("#checkIdModal").val()
 		},
 		dataType:'json',
 		timeout:(1000*30),
@@ -124,11 +124,11 @@ function fn_id_checkOk(){
 					alert("<spring:message code="comUssUmt.userManageRegistModal.noIdMsg" />"); //사용이 불가능한 아이디 입니다.
 					return;
 				}else{
-					
+
 					$("input[name=mberId]").val(returnData.checkId);
 					$("#egovModal").setEgovModalClose();
 				}
-			}else{ alert("ERROR!");return;} 
+			}else{ alert("ERROR!");return;}
 		}
 		});
 }
@@ -140,7 +140,7 @@ function fnIdCheck1(){
     var varParam = new Object();
     varParam.checkId = document.mberManageVO.mberId.value;
     var openParam = "dialogWidth:303px;dialogHeight:250px;scroll:no;status:no;center:yes;resizable:yes;";
-        
+
     alert(1);
     return false;
     retVal = window.showModalDialog(url, varParam, openParam);
@@ -161,8 +161,8 @@ function fnListPage(){
 }
 
 function fnInsert(form){
-	
-	if(confirm("<spring:message code="common.regist.msg" />")){	
+
+	if(confirm("<spring:message code="common.regist.msg" />")){
 		if(validateMberManageVO(form)){
 			if(form.password.value != form.password2.value){
 	            alert("<spring:message code="fail.user.passwordUpdate2" />");
@@ -173,7 +173,7 @@ function fnInsert(form){
 	    }
 	}
 
-	
+
 
 }
 </script>
@@ -182,7 +182,7 @@ function fnInsert(form){
 </style>
 </head>
 <body onload="fn_egov_init()">
-<form:form commandName="mberManageVO" action="${pageContext.request.contextPath}/uss/umt/EgovMberSbscrb.do" name="mberManageVO"  method="post" onSubmit="fnInsert(document.forms[0]); return false;"> 
+<form:form commandName="mberManageVO" action="${pageContext.request.contextPath}/uss/umt/EgovMberSbscrb.do" name="mberManageVO"  method="post" onSubmit="fnInsert(document.forms[0]); return false;">
 
 <div class="wTableFrm">
 	<!-- 타이틀 -->
@@ -214,7 +214,7 @@ function fnInsert(form){
 			<th><label for="mberNm">${title}</label> <span class="pilsu">*</span></th>
 			<td class="left">
 				<form:input path="mberNm" title="${title} ${inputTxt}" size="50" maxlength="50" />
-				<div><form:errors path="mberNm" cssClass="error" /></div> 
+				<div><form:errors path="mberNm" cssClass="error" /></div>
 			</td>
 		</tr>
 		<!-- 비밀번호 -->
@@ -224,12 +224,12 @@ function fnInsert(form){
 			<td class="left">
 				<div>
 					<form:password path="password" title="${title} ${inputTxt}" size="50" maxlength="20" />
-					<div><form:errors path="password" cssClass="error" /></div> 
+					<div><form:errors path="password" cssClass="error" /></div>
 				</div>
 				<div>
-					<div><spring:message code="info.password.rule.password1" /></div> 
-					<div><spring:message code="info.password.rule.pwdcheckcomb3" /></div> 
-					<div><spring:message code="info.password.rule.pwdcheckseries" /></div> 
+					<div><spring:message code="info.password.rule.password1" /></div>
+					<div><spring:message code="info.password.rule.pwdcheckcomb3" /></div>
+					<div><spring:message code="info.password.rule.pwdcheckseries" /></div>
 				</div>
 			</td>
 		</tr>
@@ -319,7 +319,7 @@ function fnInsert(form){
 			<th><label for="zip">${title}</label> <span class="pilsu">*</span></th>
 			<td class="left">
                     <input name="zip" id="zip" title="${title} ${inputTxt}" type="text" size="20" value="" maxlength="6" style="width:60px;" />
-                    <!-- form:hidden path="zip" id="zip" --> 
+                    <!-- form:hidden path="zip" id="zip" -->
                     <!-- <button class="btn_s2" onClick="fn_egov_ZipSearch(document.mberManageVO, document.mberManageVO.zip, document.mberManageVO.zip_view, document.mberManageVO.adres);return false;" title="<spring:message code="button.delete" /> <spring:message code="input.button" />">우번번호검색</button>  -->
                     <div><form:errors path="zip" cssClass="error" /></div>
 			</td>
@@ -342,11 +342,24 @@ function fnInsert(form){
                     <div><form:errors path="detailAdres" cssClass="error" /></div>
 			</td>
 		</tr>
+
+		<!-- captcha -->
+		<c:set var="title"><spring:message code="comUssUmt.userManageRegist.captcha"/></c:set>
+		<tr>
+			<th><label for="captcha">${title}</label> <span class="pilsu">*</span></th>
+			<td class="left">
+				<img src="${pageContext.request.contextPath}/captcha/image.do?" id="captcha-image" alt="captcha">
+				<form:input path="captcha" id="captcha" title="${title} ${inputTxt}" maxlength="10" style="width:60px" />
+				<a href="#" onclick="$('#captcha-image').attr('src', $('#captcha-image').attr('src') + Date.now())">새로운 문자</a>
+			    <div><form:errors path="captcha" cssClass="error" /></div>
+			</td>
+		</tr>
+
 		<input type="hidden" name="mberSttus" value="DEFAULT" />
 	</tbody>
 	</table>
 
-	<!-- 하단 버튼 --> 
+	<!-- 하단 버튼 -->
 	<div class="btn">
 		<input type="submit" class="s_submit" value="<spring:message code="button.create" />" title="<spring:message code="button.create" /> <spring:message code="input.button" />" />
 	</div><div style="clear:both;"></div>
