@@ -10,6 +10,6 @@ public interface EgovCaptchaService {
 
   void writeCaptcha(OutputStream out) throws IOException;
 
-  boolean matches(String captchaKey) throws EgovBizException;
+  void matches(String captchaKey) throws EgovBizException;
 
 }

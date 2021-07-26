@@ -2,7 +2,6 @@ package egovframework.com.sec.captcha.service.impl;
 
 import egovframework.com.sec.captcha.service.EgovCaptchaService;
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
-import egovframework.rte.fdl.cmmn.exception.EgovBizException;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -65,9 +64,6 @@ public abstract class EgovAbstractCaptchaService extends EgovAbstractServiceImpl
     this.difficulty = difficulty;
   }
 
-
-  @Override
-  public abstract boolean matches(String captchaKey) throws EgovBizException;
 
   @Override
   public String generateCaptcha() {
